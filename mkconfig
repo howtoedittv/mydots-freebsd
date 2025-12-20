@@ -6,7 +6,7 @@
 
 set -e
 
-REPO_DIR="$HOME/mydots.git"
+REPO_DIR="$HOME/mydots-freebsd"
 OLD_DIR="$HOME/oldstuff"
 PKGS=(eza zoxide fzf bat git wget thefuck tldr gedit neofetch curl unzip make gcc gmake gawk)
 
@@ -58,6 +58,7 @@ sudo cp -r ~/bin/oh-my-posh /usr/bin/
 oh-my-posh font install 0xproto || true
 mkdir -p ~/Downloads/poshthemes/
 cp ~/mydots-freebsd/catppuccin.omp.json ~/Downloads/poshthemes/ 
+
 sleep 3
 log "âœ… Setup complete!"
 
