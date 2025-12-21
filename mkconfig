@@ -21,7 +21,7 @@ cd "$REPO_DIR" || { echo "âŒ Repo folder not found at $REPO_DIR"; exit 1; }
 for pkg in "${PKGS[@]}"; do
     if ! is_installed "$pkg"; then
     	log "Installing $pkg..."
-    	sudo pkg install "$pkg"
+    	sudo pkg install -y "$pkg"
     else
         log "$pkg already installed."
         
@@ -61,6 +61,6 @@ cp ~/mydots-freebsd/catppuccin.omp.json ~/Downloads/poshthemes/
 
 sleep 3
 log "âœ… Setup complete!"
-
+source ~/.bashrc
  
 
