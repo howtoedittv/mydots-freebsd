@@ -8,25 +8,37 @@ set -e
 
 REPO_DIR="$HOME/mydots-freebsd"
 OLD_DIR="$HOME/oldstuff"
-PKGS=(eza zoxide fzf bat git wget thefuck tldr gedit neofetch curl unzip make gcc gmake gawk)
+ehco "if you have any errors with the pacakges installing it might require some manual patching based on the sepcic packages names in your distro"
 
-# --- Helper functions ---
-is_installed() { command -v "$1" &>/dev/null; }
-log() { echo -e "\033[1;36m==>\033[0m $*"; }
+if command -v pacman &>/dev/null; then
+    echo "Detected Arch-based system."
+    sudo pacman -Sy --needed --noconfirm eza zoxide fzf bat git wget thefuck tldr gedit neofetch curl unzip make gcc gmake gawk
 
-log "ðŸš€ Starting mkconfig setup..."
-cd "$REPO_DIR" || { echo "âŒ Repo folder not found at $REPO_DIR"; exit 1; }
+elif command -v apt &>/dev/null; then
+    echo "Detected Debian/Ubuntu-based system."
+    sudo apt update
+    sudo apt install -y eza zoxide fzf bat git wget thefuck tldr gedit neofetch curl unzip make gcc gmake gawk
 
+elif command -v dnf &>/dev/null; then
+    echo "Detected Fedora-based system."
+    sudo dnf install -y eza zoxide fzf bat git wget thefuck tldr gedit neofetch curl unzip make gcc gmake gawk
 
-for pkg in "${PKGS[@]}"; do
-    if ! is_installed "$pkg"; then
-    	log "Installing $pkg..."
-    	sudo pkg install -y "$pkg"
-    else
-        log "$pkg already installed."
-        
-	fi
-done
+elif command -v zypper &>/dev/null; then
+    echo "Detected openSUSE-based system."
+    sudo zypper refresh
+    sudo zypper install -y eza zoxide fzf bat git wget thefuck tldr gedit neofetch curl unzip make gcc gmake gawk
+
+elif command -v xbps-install &>/dev/null; then
+    echo "Detected Void Linux."
+    sudo xbps-install -Sy eza zoxide fzf bat git wget thefuck tldr gedit neofetch curl unzip make gcc gmake gawk
+
+elif command -v emerge &>/dev/null; then
+    echo "Detected Gentoo."
+    sudo emerge -aq eza zoxide fzf bat git wget thefuck tldr gedit neofetch curl unzip make gcc gmake gawk
+
+elif command -v pkg &>/dev/null; then
+    echo "Detected bsd based distro."
+    sudo pkg install eza zoxide fzf bat git wget thefuck tldr gedit neofetch curl unzip make gcc gmake gawk
 
 log "Backing up old bashrc..."
 mkdir -p "$OLD_DIR"
