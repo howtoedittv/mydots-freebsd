@@ -8,7 +8,7 @@ set -e
 
 REPO_DIR="$HOME/mydots-freebsd"
 OLD_DIR="$HOME/oldstuff"
-ehco "if you have any errors with the pacakges installing it might require some manual patching based on the sepcic packages names in your distro"
+echo "if you have any errors with the pacakges installing it might require some manual patching based on the sepcic packages names in your distro"
 
 if command -v pacman &>/dev/null; then
     echo "Detected Arch-based system."
@@ -40,7 +40,7 @@ elif command -v pkg &>/dev/null; then
     echo "Detected bsd based distro."
     sudo pkg install eza zoxide fzf bat git wget thefuck tldr gedit neofetch curl unzip make gcc gmake gawk
 
-log "Backing up old bashrc..."
+echo "Backing up old bashrc..."
 mkdir -p "$OLD_DIR"
 [ -f ~/.bashrc ] && mv ~/.bashrc "$OLD_DIR/" || true
 
@@ -52,7 +52,7 @@ mv ~/mydots-freebsd/startf.sh ~/
 # --- ble.sh setup ---
 cd ~
 
-log "installing ble.sh "
+echo "installing ble.sh "
 git clone https://github.com/akinomyoga/ble.sh.git
 
 cd ble.sh
@@ -63,7 +63,7 @@ cd ~
 
 # --- Oh My Posh setup -
 cd ~
-log "Installing Oh My Posh âœ¨"
+echo "Installing Oh My Posh âœ¨"
 mkdir -p ~/bin
 curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/bin
 sudo cp -r ~/bin/oh-my-posh /usr/bin/
@@ -72,7 +72,7 @@ mkdir -p ~/Downloads/poshthemes/
 cp ~/mydots-freebsd/catppuccin.omp.json ~/Downloads/poshthemes/ 
 
 sleep 3
-log "âœ… Setup complete!"
+echo "âœ… Setup complete!"
 source ~/.bashrc
- 
 
+echo "you might need to reboot your system for everything to work correctly"
